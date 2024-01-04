@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\AFS Visa Application REST API.props" />
+</Project>
