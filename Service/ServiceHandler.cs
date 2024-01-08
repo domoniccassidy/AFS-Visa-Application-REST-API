@@ -10,6 +10,8 @@ namespace AFS_Visa_Application_REST_API.Service
     {
         public static void ConfigureServices(this WebApplicationBuilder builder)
         {
+            builder.Services.AddScoped<IBranchRepository, BranchRepository>();
+            builder.Services.AddScoped<IBranchBusiness, BranchBusiness>();
             builder.Services.AddScoped<ICountryRepository, CountryRepository>();
             builder.Services.AddScoped<ICountryBusiness, CountryBusiness>();
             builder.Services.AddScoped<IVisaApplicationRepository, VisaApplicationRepository>();

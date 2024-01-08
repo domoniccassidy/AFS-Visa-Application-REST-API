@@ -4,11 +4,7 @@ using AFS_Visa_Application_REST_API.Entity;
 
 namespace AFS_Visa_Application_REST_API.Interfaces.Business
 {
-    public interface IVisaApplicationBusiness
+    public interface IVisaApplicationBusiness : IBusiness<VisaApplicationDto, AddEditVisaApplicationDto>
     {
-        List<VisaApplicationDto> Get();
-        VisaApplicationDto GetById(Guid id);
-        Guid Create(AddEditVisaApplicationDto visaApplication);
-        Guid Update(AddEditVisaApplicationDto visaApplication);
     }
 }

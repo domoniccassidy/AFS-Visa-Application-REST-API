@@ -22,6 +22,67 @@ namespace AFS_Visa_Application_REST_API.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("AFS_Visa_Application_REST_API.Entity.AdditionalInformation", b =>
+                {
+                    b.Property<Guid>("AdditionalInformationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("InformationDataType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InformationTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AdditionalInformationId");
+
+                    b.ToTable("AdditionalInformation");
+                });
+
+            modelBuilder.Entity("AFS_Visa_Application_REST_API.Entity.Appointment", b =>
+                {
+                    b.Property<Guid>("AppointmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("AppointmentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("BranchId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("AppointmentId");
+
+                    b.HasIndex("BranchId");
+
+                    b.ToTable("Appointment");
+                });
+
+            modelBuilder.Entity("AFS_Visa_Application_REST_API.Entity.Branch", b =>
+                {
+                    b.Property<Guid>("BranchId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("BranchCode")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BranchName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("CountryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("BranchId");
+
+                    b.HasIndex("CountryId");
+
+                    b.ToTable("Branch");
+                });
+
             modelBuilder.Entity("AFS_Visa_Application_REST_API.Entity.Country", b =>
                 {
                     b.Property<Guid>("CountryId")
@@ -100,8 +161,11 @@ namespace AFS_Visa_Application_REST_API.Migrations
                     b.Property<Guid>("ApplicantId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("AppointmentDate")
-                        .HasColumnType("datetime2");
+                    b.Property<Guid>("AppointmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BranchId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("DestinationCountryId")
                         .HasColumnType("uniqueidentifier");
@@ -114,9 +178,28 @@ namespace AFS_Visa_Application_REST_API.Migrations
 
                     b.HasKey("VisaApplicationId");
 
+                    b.HasIndex("AppointmentId");
+
+                    b.HasIndex("BranchId");
+
                     b.HasIndex("VisaId");
 
                     b.ToTable("VisaApplication");
+                });
+
+            modelBuilder.Entity("AdditionalInformationVisa", b =>
+                {
+                    b.Property<Guid>("AdditionalInformationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("VisaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("AdditionalInformationId", "VisaId");
+
+                    b.HasIndex("VisaId");
+
+                    b.ToTable("AdditionalInformationVisa");
                 });
 
             modelBuilder.Entity("CountryVisa", b =>
@@ -149,6 +232,28 @@ namespace AFS_Visa_Application_REST_API.Migrations
                     b.ToTable("DocumentationRequiredVisa");
                 });
 
+            modelBuilder.Entity("AFS_Visa_Application_REST_API.Entity.Appointment", b =>
+                {
+                    b.HasOne("AFS_Visa_Application_REST_API.Entity.Branch", "Branch")
+                        .WithMany("Appointments")
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Branch");
+                });
+
+            modelBuilder.Entity("AFS_Visa_Application_REST_API.Entity.Branch", b =>
+                {
+                    b.HasOne("AFS_Visa_Application_REST_API.Entity.Country", "Country")
+                        .WithMany("Branch")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+                });
+
             modelBuilder.Entity("AFS_Visa_Application_REST_API.Entity.Visa", b =>
                 {
                     b.HasOne("AFS_Visa_Application_REST_API.Entity.Country", "OfferingCountry")
@@ -162,13 +267,44 @@ namespace AFS_Visa_Application_REST_API.Migrations
 
             modelBuilder.Entity("AFS_Visa_Application_REST_API.Entity.VisaApplication", b =>
                 {
+                    b.HasOne("AFS_Visa_Application_REST_API.Entity.Appointment", "Appointment")
+                        .WithMany()
+                        .HasForeignKey("AppointmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AFS_Visa_Application_REST_API.Entity.Branch", "Branch")
+                        .WithMany("VisaApplications")
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("AFS_Visa_Application_REST_API.Entity.Visa", "Visa")
                         .WithMany("VisaApplications")
                         .HasForeignKey("VisaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Appointment");
+
+                    b.Navigation("Branch");
+
                     b.Navigation("Visa");
+                });
+
+            modelBuilder.Entity("AdditionalInformationVisa", b =>
+                {
+                    b.HasOne("AFS_Visa_Application_REST_API.Entity.AdditionalInformation", null)
+                        .WithMany()
+                        .HasForeignKey("AdditionalInformationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AFS_Visa_Application_REST_API.Entity.Visa", null)
+                        .WithMany()
+                        .HasForeignKey("VisaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CountryVisa", b =>
@@ -201,8 +337,17 @@ namespace AFS_Visa_Application_REST_API.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("AFS_Visa_Application_REST_API.Entity.Branch", b =>
+                {
+                    b.Navigation("Appointments");
+
+                    b.Navigation("VisaApplications");
+                });
+
             modelBuilder.Entity("AFS_Visa_Application_REST_API.Entity.Country", b =>
                 {
+                    b.Navigation("Branch");
+
                     b.Navigation("VisasOffered");
                 });
 

@@ -7,5 +7,6 @@
 
         public List<Visa> VisasOffered { get; set; }
         public List<Visa> VisasExempt { get; set; } 
+        public List<Branch> Branch { get; set; }
     }
 }

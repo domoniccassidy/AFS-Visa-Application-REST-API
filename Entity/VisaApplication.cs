@@ -10,9 +10,9 @@ namespace AFS_Visa_Application_REST_API.Entity
         public Guid DestinationCountryId { get; set; }
         public Guid AgentAssignedToId { get; set; }
         public Guid VisaId { get; set; }
-        public DateTime AppointmentDate { get; set; }
 
         public Visa Visa { get; set; }  
+        public Branch Branch { get; set; }
+        public Appointment Appointment { get; set; }    
     }
 }
-    

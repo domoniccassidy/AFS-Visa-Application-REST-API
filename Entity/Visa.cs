@@ -14,6 +14,7 @@
         public List<VisaApplication> VisaApplications { get; set; }
         public List<Country> CountriesExempt { get; set; }
         public List<DocumentationRequired> DocumentationRequired { get; } = new();
+        public List<AdditionalInformation> AdditionalInformation { get; } = new();
     }
 }
     

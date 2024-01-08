@@ -27,8 +27,6 @@ namespace AFS_Visa_Application_REST_API.Repository
 
         public T GetById(Guid id)
         {
-            var lol = typeof(T).Name;
-
             return DB.Set<T>().ToList().FirstOrDefault(va => (Guid) va.GetType().GetProperty(typeof(T).Name + "Id").GetValue(va, null) == id);
         }
 

@@ -1,8 +1,11 @@
-﻿using AFS_Visa_Application_REST_API.Data_Contracts.DocumentationRequired;
+﻿using AFS_Visa_Application_REST_API.Data_Contracts.AdditionalInformation;
+using AFS_Visa_Application_REST_API.Data_Contracts.Base;
+using AFS_Visa_Application_REST_API.Data_Contracts.Country;
+using AFS_Visa_Application_REST_API.Data_Contracts.DocumentationRequired;
 
 namespace AFS_Visa_Application_REST_API.Data_Contracts.Visa
 {
-    public class VisaDto
+    public class VisaDto : IDataContract
     {
         public Guid VisaId { get; set; }
         public string VisaType { get; set; }
@@ -12,5 +15,7 @@ namespace AFS_Visa_Application_REST_API.Data_Contracts.Visa
         public int? EntryTimes { get; set; }
 
         public List<DocumentationRequiredDto> DocumentationRequired { get; set; }
+        public List<AdditionalInformationDto> AdditionalInformation { get; set; }
+        public CountryDto OfferingCountry { get; set; }
     }
 }

@@ -2,11 +2,7 @@
 
 namespace AFS_Visa_Application_REST_API.Interfaces.Business
 {
-    public interface ICountryBusiness
+    public interface ICountryBusiness: IBusiness<CountryDto, AddEditCountryDto>
     {
-        List<CountryDto> Get();
-        CountryDto GetById(Guid id);
-        Guid Create(AddEditCountryDto country);
-        Guid Update(AddEditCountryDto country);
     }
 }

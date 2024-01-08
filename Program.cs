@@ -69,6 +69,7 @@ namespace AFS_Visa_Application_REST_API
             app.ConfigureVisaApplicationEndpoints();
             app.ConfigureVisaEndpoints();
             app.ConfigureCountryEndpoints();
+            app.ConfigureBranchEndpoints();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

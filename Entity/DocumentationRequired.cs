@@ -8,5 +8,4 @@
 
         public List<Visa> Visa { get; } = new();
     }
-
 }

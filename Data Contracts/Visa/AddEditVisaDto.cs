@@ -1,6 +1,9 @@
-﻿namespace AFS_Visa_Application_REST_API.Data_Contracts.Visa
+﻿using AFS_Visa_Application_REST_API.Data_Contracts.Base;
+using AFS_Visa_Application_REST_API.Data_Contracts.Country;
+
+namespace AFS_Visa_Application_REST_API.Data_Contracts.Visa
 {
-    public class AddEditVisaDto
+    public class AddEditVisaDto : IDataContract
     {
         public Guid VisaId { get; set; }
         public Guid CountryId { get; set; }
