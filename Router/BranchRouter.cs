@@ -9,15 +9,15 @@ namespace AFS_Visa_Application_REST_API.Router
         private const string DefaultRoute = "Branch";
         public static void ConfigureBranchEndpoints(this WebApplication app) 
         {
-            app.MapGet(DefaultRoute, GetCountries).RequireAuthorization("authorised_visa_applicant");
-            app.MapGet(DefaultRoute + "/{id:guid}", GetBranchById).RequireAuthorization("authorised_visa_applicant");
+            app.MapGet(DefaultRoute, GetBranches);
+            app.MapGet(DefaultRoute + "/{id:guid}", GetBranchById);
             app.MapGet(DefaultRoute + "/Appointment/{id:guid},{departureDate:dateTime}", GetAppointmentDates).RequireAuthorization("authorised_visa_applicant");
             app.MapPut(DefaultRoute + "/{id:guid}", UpdateBranch).RequireAuthorization("authorised_visa_applicant");
             app.MapPost(DefaultRoute, CreateBranch).RequireAuthorization("authorised_visa_applicant");
             app.MapPost(DefaultRoute + "/BookAppointment", BookAppointment).RequireAuthorization("authorised_visa_applicant");
         }
 
-        private async static Task<IResult> GetCountries(IBranchBusiness _branchBusiness)
+        private async static Task<IResult> GetBranches(IBranchBusiness _branchBusiness)
         {
             var branchs = _branchBusiness.Get();
             return Results.Ok(branchs);

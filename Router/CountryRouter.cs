@@ -8,7 +8,7 @@ namespace AFS_Visa_Application_REST_API.Router
         private const string DefaultRoute = "Country";
         public static void ConfigureCountryEndpoints(this WebApplication app) 
         {
-            app.MapGet(DefaultRoute, GetCountries).RequireAuthorization("authorised_visa_applicant");
+            app.MapGet(DefaultRoute, GetCountries);
             app.MapGet(DefaultRoute + "/{id:guid}", GetCountryById).RequireAuthorization("authorised_visa_applicant");
             app.MapPut(DefaultRoute + "/{id:guid}", UpdateCountry).RequireAuthorization("authorised_visa_applicant");
             app.MapPost(DefaultRoute, CreateCountry).RequireAuthorization("authorised_visa_applicant");
