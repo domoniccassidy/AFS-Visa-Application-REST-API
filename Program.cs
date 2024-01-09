@@ -71,12 +71,10 @@ namespace AFS_Visa_Application_REST_API
             app.ConfigureCountryEndpoints();
             app.ConfigureBranchEndpoints();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.EnablePersistAuthorization());
-            }
+          
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.EnablePersistAuthorization());
+            
 
             app.Run();
         }
