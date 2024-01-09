@@ -1,5 +1,4 @@
 ﻿using AFS_Visa_Application_REST_API.Data_Contracts;
-using AFS_Visa_Application_REST_API.Data_Contracts.Documentation;
 using AFS_Visa_Application_REST_API.Data_Contracts.VisaApplication;
 using AFS_Visa_Application_REST_API.Entity;
 using AFS_Visa_Application_REST_API.Interfaces.Business;
@@ -38,14 +37,6 @@ namespace AFS_Visa_Application_REST_API.Business
         {
             var visaApplicationEntity = _mapper.Map<VisaApplication>(visaApplication);
             return _visaApplicationRepository.Update(visaApplicationEntity);
-        }
-
-        private void UploadDocumentation(List<DocumentationDto> documentation)
-        {
-            foreach (var document in documentation)
-            {
-                // Upload docuemntation to blob storage
-            }
         }
     }
 }

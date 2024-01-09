@@ -4,6 +4,7 @@
     {
         public Guid AppointmentId { get; set; }
         public DateTime AppointmentDate { get; set; }
+        public Guid BranchId { get; set; }
 
         public Branch Branch { get; set; }
     }

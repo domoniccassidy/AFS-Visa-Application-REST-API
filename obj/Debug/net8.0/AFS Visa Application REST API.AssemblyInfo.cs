@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AFS Visa Application REST API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b86cc3e76bfd274aa375fd632cd082313252c792")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2df0318e2bab178274d6f9a2610afb2ce4397dbd")]
 [assembly: System.Reflection.AssemblyProductAttribute("AFS Visa Application REST API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AFS Visa Application REST API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

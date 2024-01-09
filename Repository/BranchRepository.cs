@@ -27,5 +27,11 @@ namespace AFS_Visa_Application_REST_API.Repository
 
             return baseDates;
         }
+
+        public void BookAppointment(Appointment appointment)
+        {
+            DB.Set<Appointment>().Add(appointment);
+            DB.SaveChanges();
+        }
     }
 }

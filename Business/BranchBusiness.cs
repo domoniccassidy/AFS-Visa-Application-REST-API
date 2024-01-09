@@ -1,4 +1,5 @@
-﻿using AFS_Visa_Application_REST_API.Data_Contracts.Branch;
+﻿using AFS_Visa_Application_REST_API.Data_Contracts.Appointment;
+using AFS_Visa_Application_REST_API.Data_Contracts.Branch;
 using AFS_Visa_Application_REST_API.Entity;
 using AFS_Visa_Application_REST_API.Interfaces.Business;
 using AFS_Visa_Application_REST_API.Interfaces.Repository;
@@ -42,6 +43,11 @@ namespace AFS_Visa_Application_REST_API.Business
         public List<List<DateTime>> GetAppointmentDates(Guid branchId, DateTime departureDate)
         {
             return _branchRepository.GetAppointmentDates(branchId, departureDate);
+        }
+
+        public void BookAppointment(AddEditAppointmentDto appointment)
+        {
+            _branchRepository.BookAppointment(_mapper.Map<Appointment>(appointment));
         }
     }
 }

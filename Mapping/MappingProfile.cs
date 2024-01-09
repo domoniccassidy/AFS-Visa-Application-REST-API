@@ -1,5 +1,6 @@
 ﻿using AFS_Visa_Application_REST_API.Data_Contracts;
 using AFS_Visa_Application_REST_API.Data_Contracts.AdditionalInformation;
+using AFS_Visa_Application_REST_API.Data_Contracts.Appointment;
 using AFS_Visa_Application_REST_API.Data_Contracts.Branch;
 using AFS_Visa_Application_REST_API.Data_Contracts.Country;
 using AFS_Visa_Application_REST_API.Data_Contracts.DocumentationRequired;
@@ -15,6 +16,7 @@ namespace AFS_Visa_Application_REST_API.Mapping
         public MappingProfile()
         {
             CreateMap<AdditionalInformation, AdditionalInformationDto>();
+            CreateMap<AddEditAppointmentDto, Appointment>();
             CreateMap<Branch, BranchDto>();
             CreateMap<Country, CountryDto>();
             CreateMap<AddEditCountryDto, Country>();

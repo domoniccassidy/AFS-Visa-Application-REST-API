@@ -4,6 +4,7 @@ using AFS_Visa_Application_REST_API.Db;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AFS_Visa_Application_REST_API.Migrations
 {
     [DbContext(typeof(VisaApplicationContext))]
-    partial class VisaApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20240108202055_VisaApplication-Fix")]
+    partial class VisaApplicationFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

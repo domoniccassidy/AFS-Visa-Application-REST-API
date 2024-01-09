@@ -1,4 +1,5 @@
-﻿using AFS_Visa_Application_REST_API.Data_Contracts.Branch;
+﻿using AFS_Visa_Application_REST_API.Data_Contracts.Appointment;
+using AFS_Visa_Application_REST_API.Data_Contracts.Branch;
 using AFS_Visa_Application_REST_API.Interfaces.Business;
 
 namespace AFS_Visa_Application_REST_API.Router
@@ -13,6 +14,7 @@ namespace AFS_Visa_Application_REST_API.Router
             app.MapGet(DefaultRoute + "/Appointment/{id:guid},{departureDate:dateTime}", GetAppointmentDates).RequireAuthorization("authorised_visa_applicant");
             app.MapPut(DefaultRoute + "/{id:guid}", UpdateBranch).RequireAuthorization("authorised_visa_applicant");
             app.MapPost(DefaultRoute, CreateBranch).RequireAuthorization("authorised_visa_applicant");
+            app.MapPost(DefaultRoute + "/BookAppointment", BookAppointment).RequireAuthorization("authorised_visa_applicant");
         }
 
         private async static Task<IResult> GetCountries(IBranchBusiness _branchBusiness)
@@ -43,6 +45,12 @@ namespace AFS_Visa_Application_REST_API.Router
         {
             var appointmentDates = _branchBusiness.GetAppointmentDates(id, departureDate);
             return Results.Ok(appointmentDates); 
+        }
+
+        private async static Task<IResult> BookAppointment(IBranchBusiness _branchBusiness, AddEditAppointmentDto appointment)
+        {
+            _branchBusiness.BookAppointment(appointment);
+            return Results.Ok(appointment.AppointmentId);
         }
     }
 }
